@@ -1,0 +1,11 @@
+{
+  "name": "DocumentFlow",
+  "version": "0.0.1",
+  "description": "DocumentFlow",
+  "workspaces": [
+    "database-ms",
+    "login-ms",
+    "send-email-ms",
+    "signup-ms"
+  ]
+}
