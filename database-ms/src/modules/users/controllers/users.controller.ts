@@ -1,12 +1,13 @@
+import { CreateUserUseCase } from '@modules/users/useCases/createUser/create-user.useCase';
 import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
-  constructor() {} // private readonly getUserByIdUseCase: GetUserByIdUseCase, // private readonly deleteUserUseCase: DeleteUserUseCase, // private readonly updateUserUseCase: UpdateUserUseCase, // private readonly getUserUseCase: GetUserUseCase, // private readonly createUserUseCase: CreateUserUseCase,
+  constructor(private readonly createUserUseCase: CreateUserUseCase) {} // private readonly getUserByIdUseCase: GetUserByIdUseCase, // private readonly deleteUserUseCase: DeleteUserUseCase, // private readonly updateUserUseCase: UpdateUserUseCase, // private readonly getUserUseCase: GetUserUseCase, // private readonly createUserUseCase: CreateUserUseCase,
 
   @Post()
   createUser() {
-    return 'this.createUserUseCase.execute()';
+    return this.createUserUseCase.execute();
   }
 
   @Get('/')
