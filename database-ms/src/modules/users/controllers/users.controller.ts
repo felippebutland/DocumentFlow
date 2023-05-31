@@ -1,18 +1,33 @@
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/create-user.useCase';
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { UserDTO } from 'src/dto/user.dto';
+import { DeleteUserUseCase } from '../useCases/deleteUser/delete-user.useCase';
+import { GetUserUseCase } from '../useCases/getUser/get-user.useCase';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly createUserUseCase: CreateUserUseCase) {} // private readonly getUserByIdUseCase: GetUserByIdUseCase, // private readonly deleteUserUseCase: DeleteUserUseCase, // private readonly updateUserUseCase: UpdateUserUseCase, // private readonly getUserUseCase: GetUserUseCase, // private readonly createUserUseCase: CreateUserUseCase,
+  constructor(
+    private readonly createUserUseCase: CreateUserUseCase,
+    private readonly getUserUseCase: GetUserUseCase,
+    private readonly deleteUserUseCase: DeleteUserUseCase,
+  ) {} // private readonly getUserByIdUseCase: GetUserByIdUseCase, // private readonly deleteUserUseCase: DeleteUserUseCase, // private readonly updateUserUseCase: UpdateUserUseCase, // private readonly getUserUseCase: GetUserUseCase, // private readonly createUserUseCase: CreateUserUseCase,
 
   @Post()
-  createUser() {
-    return this.createUserUseCase.execute();
+  async createUser(@Body() user: UserDTO) {
+    await this.createUserUseCase.execute(user);
   }
 
   @Get('/')
   getHome() {
-    return 'this.getUserUseCase.execute()';
+    return this.getUserUseCase.execute();
   }
 
   @Get('/:id')
@@ -26,7 +41,7 @@ export class UsersController {
   }
 
   @Delete('/:id')
-  deleteUser() {
-    return 'this.deleteUserUseCase.execute()';
+  deleteUser(@Query('id') id: string) {
+    return this.deleteUserUseCase.execute(id);
   }
 }

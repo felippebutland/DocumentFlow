@@ -14,6 +14,7 @@
       "@modules/*": ["src/modules/*"],
       "@users/*": ["src/modules/users/*"],
       "@modules/users/useCases/*": ["src/modules/users/useCases/*"],
+      "@dto/*": ["../../src/dto/*"],
     },
     "incremental": true,
     "skipLibCheck": true,

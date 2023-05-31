@@ -20,6 +20,9 @@ export class User extends Document {
 
   @Prop()
   updated_at: Date;
+
+  @Prop()
+  active: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

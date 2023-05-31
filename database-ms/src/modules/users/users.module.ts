@@ -1,16 +1,20 @@
+import { UserSchema } from '@modules/schemas/user.schema';
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { UsersController } from './controllers/users.controller';
-import UserRepository from './repository/user.repository';
+import { UserRepository } from './repository/user.repository';
 import { CreateUserUseCase } from './useCases/createUser/create-user.useCase';
+import { DeleteUserUseCase } from './useCases/deleteUser/delete-user.useCase';
+import { GetUserUseCase } from './useCases/getUser/get-user.useCase';
 
 @Module({
-  imports: [],
+  imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
   controllers: [UsersController],
   providers: [
     // GetUserByIdUseCase,
-    // GetUserUseCase,
+    GetUserUseCase,
     CreateUserUseCase,
-    // DeleteUserUseCase,
+    DeleteUserUseCase,
     // UpdateUserUseCase,
     UserRepository,
   ],
