@@ -1,8 +1,11 @@
+import { UserRepository } from '@modules/users/repository/user.repository';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class GetUserByIdUseCase {
-  async execute() {
-    return 'get user by id';
+  constructor(private readonly userRepository: UserRepository) {}
+
+  async execute(id: string) {
+    return this.userRepository.getUserById(id);
   }
 }

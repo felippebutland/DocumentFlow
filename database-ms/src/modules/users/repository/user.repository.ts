@@ -22,4 +22,8 @@ export class UserRepository {
   async inactiveUser(id: string): Promise<void> {
     await this.userModel.findByIdAndUpdate(id, { active: false }).exec();
   }
+
+  async getUserById(id: string): Promise<UserDTO | undefined> {
+    return this.userModel.findById(id).exec();
+  }
 }

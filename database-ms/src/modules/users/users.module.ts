@@ -7,12 +7,13 @@ import { UserRepository } from './repository/user.repository';
 import { CreateUserUseCase } from './useCases/createUser/create-user.useCase';
 import { DeleteUserUseCase } from './useCases/deleteUser/delete-user.useCase';
 import { GetUserUseCase } from './useCases/getUser/get-user.useCase';
+import { GetUserByIdUseCase } from './useCases/getUserById/get-user-by-id.useCase';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
   controllers: [UsersController],
   providers: [
-    // GetUserByIdUseCase,
+    GetUserByIdUseCase,
     GetUserUseCase,
     CreateUserUseCase,
     DeleteUserUseCase,
