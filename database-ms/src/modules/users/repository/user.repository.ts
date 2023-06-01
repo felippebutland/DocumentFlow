@@ -1,7 +1,7 @@
 import { User } from '@modules/schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UserDTO } from '../../../dto/user.dto';
+import { UserDTO } from '../dto/user.dto';
 
 export class UserRepository {
   constructor(

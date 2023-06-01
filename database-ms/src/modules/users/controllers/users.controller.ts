@@ -8,7 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { UserDTO } from 'src/dto/user.dto';
+import { UserDTO } from '../dto/user.dto';
 import { DeleteUserUseCase } from '../useCases/deleteUser/delete-user.useCase';
 import { GetUserUseCase } from '../useCases/getUser/get-user.useCase';
 

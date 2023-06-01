@@ -1,4 +1,5 @@
 import { UserSchema } from '@modules/schemas/user.schema';
+import { UserValidator } from '@modules/users/validators/user.validator';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersController } from './controllers/users.controller';
@@ -16,6 +17,7 @@ import { GetUserUseCase } from './useCases/getUser/get-user.useCase';
     CreateUserUseCase,
     DeleteUserUseCase,
     // UpdateUserUseCase,
+    UserValidator,
     UserRepository,
   ],
 })
