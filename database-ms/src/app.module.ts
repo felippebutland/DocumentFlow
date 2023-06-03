@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DocumentModule } from './modules/documents/documents.module';
+import { LoggerModule } from './modules/logger/logger.module';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({
@@ -24,6 +25,7 @@ import { UsersModule } from './modules/users/users.module';
     ]),
     DocumentModule,
     UsersModule,
+    LoggerModule,
   ],
   controllers: [],
   providers: [],

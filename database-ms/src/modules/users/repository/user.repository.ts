@@ -8,10 +8,9 @@ export class UserRepository {
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
 
-  async createUser(user: UserDTO): Promise<void> {
+  async createUser(user: UserDTO): Promise<any> {
     const createdUser = new this.userModel(user);
-    const a = await createdUser.save();
-    console.log(a);
+    return createdUser.save();
   }
 
   async getUser(params?: Partial<UserDTO>): Promise<UserDTO[] | undefined> {
@@ -25,5 +24,9 @@ export class UserRepository {
 
   async getUserById(id: string): Promise<UserDTO | undefined> {
     return this.userModel.findById(id).exec();
+  }
+
+  async updateUser(user: Partial<UserDTO>, id: string): Promise<void> {
+    await this.userModel.updateOne({ _id: id }, user).exec();
   }
 }

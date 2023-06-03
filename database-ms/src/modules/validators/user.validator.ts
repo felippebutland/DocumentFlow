@@ -1,6 +1,6 @@
 import { HttpException } from '@nestjs/common';
 import { z } from 'zod';
-import { UserDTO } from '../dto/user.dto';
+import { UserDTO } from '../users/dto/user.dto';
 
 export class UserValidator {
   validateOnCreate(user: UserDTO): void {
@@ -9,6 +9,7 @@ export class UserValidator {
       phoneNumber: z.string(),
       emailAddress: z.string().email(),
       notification: z.boolean(),
+      active: z.boolean(),
       created_at: z.date(),
       updated_at: z.date(),
     });

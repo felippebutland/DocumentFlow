@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
+import { UserValidator } from '../../../validators/user.validator';
 import { UserDTO } from '../../dto/user.dto';
 import { UserRepository } from '../../repository/user.repository';
-import { UserValidator } from '../../validators/user.validator';
 
 @Injectable()
 export class CreateUserUseCase {
@@ -10,7 +10,7 @@ export class CreateUserUseCase {
     private readonly userValidator: UserValidator,
   ) {}
 
-  async execute(user: UserDTO) {
+  async execute(user: UserDTO): Promise<any> {
     const params = {
       ...user,
       created_at: new Date(),
@@ -25,6 +25,6 @@ export class CreateUserUseCase {
 
     if (userExists) throw new HttpException('User already exists', 409);
 
-    await this.userRepository.createUser(params);
+    return this.userRepository.createUser(params);
   }
 }

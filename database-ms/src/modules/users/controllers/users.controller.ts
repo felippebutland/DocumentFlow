@@ -1,3 +1,4 @@
+import { CreateLoggerUseCase } from '@modules/logger/useCases/createLogger';
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/create-user.useCase';
 import {
   Body,
@@ -12,6 +13,7 @@ import { UserDTO } from '../dto/user.dto';
 import { DeleteUserUseCase } from '../useCases/deleteUser/delete-user.useCase';
 import { GetUserUseCase } from '../useCases/getUser/get-user.useCase';
 import { GetUserByIdUseCase } from '../useCases/getUserById/get-user-by-id.useCase';
+import { UpdateUserUseCase } from '../useCases/updateUser/update.useCase';
 
 @Controller('users')
 export class UsersController {
@@ -20,11 +22,22 @@ export class UsersController {
     private readonly getUserUseCase: GetUserUseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase,
     private readonly getUserByIdUseCase: GetUserByIdUseCase,
+    private readonly updateUserUseCase: UpdateUserUseCase,
+    private readonly loggerUseCase: CreateLoggerUseCase,
   ) {}
 
   @Post()
   async createUser(@Body() user: UserDTO) {
-    await this.createUserUseCase.execute(user);
+    const userCreated = await this.createUserUseCase.execute(user);
+
+    console.log(userCreated);
+    await this.loggerUseCase.execute({
+      user: userCreated._id,
+      action: 'create',
+      ip: '127.0.0.1',
+      newRecord: userCreated,
+      created_at: new Date(),
+    });
   }
 
   @Get('/')
@@ -38,8 +51,8 @@ export class UsersController {
   }
 
   @Patch('/:id')
-  updateUser() {
-    return 'this.updateUserUseCase.execute()';
+  updateUser(@Body() user: Partial<UserDTO>, @Query('id') id: string) {
+    return this.updateUserUseCase.execute(user, id);
   }
 
   @Delete('/:id')
