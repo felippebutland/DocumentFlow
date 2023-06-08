@@ -23,7 +23,7 @@ export class UserRepository {
   }
 
   async getUserById(id: string): Promise<UserDTO | undefined> {
-    return this.userModel.findById(id).exec();
+    return this.userModel.findById(id, { active: true }).exec();
   }
 
   async updateUser(user: Partial<UserDTO>, id: string): Promise<void> {

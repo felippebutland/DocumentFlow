@@ -4,6 +4,7 @@ import { LoggerSchema } from '@modules/schemas/logger.schema';
 import { UserSchema } from '@modules/schemas/user.schema';
 import { UserValidator } from '@modules/validators/user.validator';
 import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersController } from './controllers/users.controller';
 import { UserRepository } from './repository/user.repository';
@@ -17,6 +18,21 @@ import { UpdateUserUseCase } from './useCases/updateUser/update.useCase';
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     MongooseModule.forFeature([{ name: 'Logger', schema: LoggerSchema }]),
+    ClientsModule.register([
+      {
+        name: 'any_name_i_want',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'any_client_id_i_want',
+            brokers: ['localhost:29092'],
+          },
+          consumer: {
+            groupId: 'an_unique_string_id',
+          },
+        },
+      },
+    ]),
   ],
   controllers: [UsersController],
   providers: [

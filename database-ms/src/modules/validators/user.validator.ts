@@ -1,4 +1,4 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 import { z } from 'zod';
 import { UserDTO } from '../users/dto/user.dto';
 
@@ -17,7 +17,10 @@ export class UserValidator {
     try {
       schema.parse(user);
     } catch (err) {
-      throw new HttpException(err.issues[0].message, 409);
+      throw new HttpException(
+        err.issues[0].message,
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
   }
 }

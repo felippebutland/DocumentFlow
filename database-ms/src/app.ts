@@ -1,19 +1,20 @@
-import { HttpAdapterHost, NestFactory } from '@nestjs/core';
-import { ExpressAdapter } from '@nestjs/platform-express';
+import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import dotenv from 'dotenv';
-import express from 'express';
 import { AppModule } from './app.module';
 
 export const createNestServer = async () => {
-  const expressInstance = express();
-  const app = await NestFactory.create(
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
-    new ExpressAdapter(expressInstance),
+    {
+      transport: Transport.KAFKA,
+      options: {
+        client: {
+          brokers: ['localhost:29092'],
+        },
+      },
+    },
   );
   dotenv.config();
-  app.get(HttpAdapterHost);
-  app.useGlobalFilters();
-
-  app.enableCors();
   return app.init();
 };

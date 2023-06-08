@@ -1,3 +1,9 @@
 node_modules/
 
 package-lock.json
+
+database-ms/dist
+document-ms/dist
+login-ms/dist
+send-email-ms/dist
+signup-ms/dist
