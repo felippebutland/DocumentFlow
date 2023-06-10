@@ -1,3 +1,4 @@
+import { CreateLoggerUseCase } from '@modules/logger/useCases/createLogger';
 import { HttpException, Injectable } from '@nestjs/common';
 import { UserValidator } from '../../../validators/user.validator';
 import { UserDTO } from '../../dto/user.dto';
@@ -8,6 +9,7 @@ export class CreateUserUseCase {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly userValidator: UserValidator,
+    private readonly loggerUseCase: CreateLoggerUseCase,
   ) {}
 
   async execute(user: UserDTO): Promise<any> {
@@ -25,6 +27,14 @@ export class CreateUserUseCase {
 
     if (userExists) throw new HttpException('User already exists', 409);
 
-    return this.userRepository.createUser(params);
+    const userCreated = await this.userRepository.createUser(params);
+
+    await this.loggerUseCase.execute({
+      user: userCreated._id,
+      action: 'create',
+      ip: '127.0.0.1',
+      newRecord: userCreated,
+      created_at: new Date(),
+    });
   }
 }

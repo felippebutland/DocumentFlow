@@ -28,7 +28,7 @@ import { UpdateUserUseCase } from './useCases/updateUser/update.useCase';
             brokers: ['localhost:29092'],
           },
           consumer: {
-            groupId: 'an_unique_string_id',
+            groupId: 'any_client_id_i_want',
           },
         },
       },

@@ -22,8 +22,8 @@ export class CreateDocumentUseCase {
 
   async execute(userId: string, document: any): Promise<any> {
     return this.client.emit('medium.rocks', {
-      foo: 'bar',
-      data: new Date().toString(),
+      context: 'getUserById',
+      id: userId,
     });
     // return await this.documentRepository.createDocument(userId, document);
   }
