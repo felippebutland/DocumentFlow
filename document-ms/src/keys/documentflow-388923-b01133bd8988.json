@@ -1,4 +1,4 @@
-const document = {
+{
   "type": "service_account",
   "project_id": "documentflow-388923",
   "private_key_id": "b01133bd898827a029f129e2f57dc306229f67c0",
