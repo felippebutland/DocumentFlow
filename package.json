@@ -9,6 +9,13 @@
     "signup-ms"
   ],
   "scripts": {
-    "docker": "docker-compose up -d"
+    "docker": "docker-compose up -d",
+    "dev": "likec4 dev",
+    "start": "likec4 start",
+    "build": "likec4 build"
+
+  },
+  "devDependencies": {
+    "likec4": "^1.15.1"
   }
 }

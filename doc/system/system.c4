@@ -1,0 +1,136 @@
+
+model {
+
+  documentFlow = documentFlow "Envio de documentos" {
+    style{
+      color sky     
+    }
+
+      documentFlowApiGateway = service 'documentFlowApiGateway' {
+        title 'API Gateway'
+        description 'APi Gateway document flow'   
+        technology 'NestJs'
+        icon: tech:nestjs
+      }  
+
+      loginMs = service 'loginMs' {
+        title 'Micro-serviço de login'
+        description 'Microserviço responsável por login'   
+        technology 'Nestjs'
+        icon: tech:nestjs
+      }
+
+      signUpMs = service 'signUpMs' {
+        title 'Micro-serviço de criação de conta'
+        description 'Microserviço responsável por criação de conta'   
+        technology 'Nestjs'
+        icon: tech:nestjs
+      }
+
+      notificationMs = service 'notificationMs' {
+        title 'Micro-serviço de notificação'
+        description 'Microserviço responsável por notificação'   
+        technology 'Nestjs'
+        icon: tech:nestjs
+      }
+
+      documentMs = service 'documentMs' {
+        title 'Micro-serviço de documentos'
+        description 'Microserviço responsável pelos documentos'   
+        technology 'Nestjs'
+        icon: tech:nestjs
+      }
+
+      mqLogin = MQ 'Mq Login' {
+        title 'MQ Login'
+        description 'MQ para Login'
+        technology 'kafka'
+        icon: tech:kafka
+      }
+
+      mqSignUp = MQ 'Mq SignUp' {
+        title 'MQ SignUp'
+        description 'MQ para SignUp'
+        technology 'kafka'
+        icon: tech:kafka
+      }
+
+      mqNotification = MQ 'Mq Notification' {
+        title 'MQ Notification'
+        description 'MQ para Notification'
+        technology 'kafka'
+        icon: tech:kafka
+      }
+
+      mqDocument = MQ 'Mq Document' {
+        title 'MQ Document'
+        description 'MQ para Document'
+        technology 'kafka'
+        icon: tech:kafka
+      }
+
+      loginMs .saves databases.mainDatabase {
+        title 'access main database'
+      }
+
+      signUpMs .saves databases.mainDatabase {
+        title 'access main database'
+      }
+
+      notificationMs .saves databases.mainDatabase {
+        title 'access main database'
+      }
+
+      documentMs .saves databases.mainDatabase {
+        title 'access main database'
+      }
+
+      documentFlowApiGateway .uses mqLogin {
+        title 'Backend uses loginMs'
+      }
+
+      documentFlowApiGateway .uses mqSignUp {
+        title 'Backend uses signUpMs'
+      }
+
+      documentFlowApiGateway .uses mqDocument {
+        title 'Backend uses documentMs'
+      }
+
+      documentFlowApiGateway .uses mqNotification {
+        title 'Backend uses notificationMs'
+      }
+
+      mqLogin .uses loginMs {
+        title 'queue use login micro-service'
+      }
+
+      mqDocument .uses documentMs {
+        title 'queue use document micro-service'
+      }
+
+      mqNotification .uses notificationMs {
+        title 'queue use notification micro-service'
+      }
+
+      mqSignUp .uses signUpMs {
+        title 'queue use signUp micro-services'
+      }
+
+      customer .access documentFlowApiGateway {
+        title 'User accesses API Gateway'
+    }  
+  }
+
+    customer .access documentFlowApiGateway {
+        title 'User accesses API Gateway'
+    }   
+}
+
+views {
+  view of documentFlow{
+    include *
+    include databases.mainDatabase
+  }
+
+}

@@ -1,0 +1,103 @@
+specification {
+
+  element JusfyEnterprise {
+    style {
+      opacity 60%
+      color muted
+      border dashed
+      shape rectangle
+    }
+  }
+
+  element documentFlow {
+    style {
+      opacity 60%
+      color muted
+      border dashed
+      shape rectangle
+    }
+  }
+
+  element container {
+    style {
+      opacity 20%
+    }
+  }
+
+  element actor {
+    style {
+      shape person
+      color indigo      
+    }
+  }
+
+  element service {
+    style {
+      opacity 50%
+      border dashed
+      color amber
+      icon aws:ec2
+      shape rectangle
+    }
+  }
+
+  element provider {
+    style {
+      opacity 50%
+      border dashed
+      color red
+      shape rectangle
+    }
+  }
+
+  element frontend {
+    style {
+      shape browser
+      color secondary
+      opacity 50%
+      border dashed
+    }
+  }
+
+  element database {
+    style {
+      shape cylinder
+      color slate
+    }
+
+
+  }
+
+  element MQ {
+    style {
+      shape queue
+      color slate
+    }
+  }
+
+  tag deprecated
+
+  relationship uses {
+    color amber
+    head vee    
+    line dashed
+  }
+
+relationship access {
+    color green
+    head vee    
+    line dotted
+  }
+
+  relationship saves {
+    color slate
+    head vee
+    line solid
+  }
+
+  relationship sends {
+    color primary
+    head vee
+    line solid
+  }
+}

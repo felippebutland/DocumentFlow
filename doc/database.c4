@@ -1,0 +1,19 @@
+model {
+  databases = JusfyEnterprise "Databases" {
+    style{
+      color sky
+      icon tech:postgresql  
+    }
+
+    mainDatabase = database 'Main database' {
+        description 'Monolith database'
+        icon tech:postgresql
+    }
+  }
+}
+
+views {
+  view of databases{
+    include *   
+  }
+}

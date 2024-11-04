@@ -1,0 +1,14 @@
+model {
+
+  customer = actor 'User' {
+    title 'User'
+    description 'Final user'
+  }
+}
+
+views {
+
+  view index {
+    include *
+  }
+}
